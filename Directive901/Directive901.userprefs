@@ -1,8 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\LoginPanelsUI.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Networking\LoginIO.cs">
     <Files>
-      <File FileName="Assets\Scripts\LoginPanelsUI.cs" Line="16" Column="2" />
+      <File FileName="Assets\Scripts\LoginPanelsUI.cs" Line="46" Column="22" />
+      <File FileName="Assets\Scripts\Networking\LoginIO.cs" Line="35" Column="76" />
+      <File FileName="..\..\Sun.TestClient\CommandBuilders\ExitCommandBuilder.cs" Line="30" Column="1" />
+      <File FileName="Assets\Scripts\Extra\Sun.DTO\Helpers\GuidConverter.cs" Line="1" Column="1" />
+      <File FileName="..\..\sun.server_side\Sun.DTO\Responses\BaseResponseDTO.cs" Line="7" Column="42" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

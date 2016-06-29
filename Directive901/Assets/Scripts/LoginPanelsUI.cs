@@ -1,8 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class LoginPanelsUI : MonoBehaviour {
-	[SerializeField] GameObject loginPanel,registerPanel;
+	[SerializeField] GameObject loginPanel=null,
+							 registerPanel=null;
+
+	[SerializeField] InputField ifName,ifPass,ifEmail;
+
+	[SerializeField] InputField ifLogin,ifPassword;
 
 	void Start () {
 		btnShowLogin();
@@ -20,4 +26,23 @@ public class LoginPanelsUI : MonoBehaviour {
 		registerPanel.SetActive(false);
 	}
 
+	public void btnRegister()
+	{
+		LoginIO.SendRegistration(
+			ifName.text,
+			ifEmail.text,
+			ifPass.text);
+	}
+
+	public void btnLogin()
+	{
+		LoginIO.SendAuthorization(
+			ifLogin.text,
+			ifPassword.text);
+	}
+
+	public void btnLogOut()
+	{
+		LoginIO.SendExit();
+	}
 }
