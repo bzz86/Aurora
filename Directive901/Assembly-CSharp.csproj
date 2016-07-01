@@ -53,11 +53,6 @@
      <Compile Include="Assets\Scripts\Extra\Sun.DTO\Requests\RegistrationRequestDTO.cs" />
      <Compile Include="Assets\Scripts\Extra\Sun.DTO\Requests\RequestWithToken.cs" />
      <Compile Include="Assets\Scripts\Extra\Sun.DTO\Requests\RequestWithoutToken.cs" />
-     <Compile Include="Assets\Scripts\Extra\Sun.DTO\Responses\AuthorizationResponseDTO.cs" />
-     <Compile Include="Assets\Scripts\Extra\Sun.DTO\Responses\BaseResponseDTO.cs" />
-     <Compile Include="Assets\Scripts\Extra\Sun.DTO\Responses\ErrorResponseDTO.cs" />
-     <Compile Include="Assets\Scripts\Extra\Sun.DTO\Responses\ExitResponseDTO.cs" />
-     <Compile Include="Assets\Scripts\Extra\Sun.DTO\Responses\RegistrationResponseDTO.cs" />
      <Compile Include="Assets\Scripts\LoginPanelsUI.cs" />
      <Compile Include="Assets\Scripts\Networking\LoginIO.cs" />
  <Reference Include="UnityEngine.UI">

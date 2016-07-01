@@ -25,14 +25,50 @@ public class LoginIO : MonoBehaviour {
 
 	void CreateWebSoket()
 	{
+		
 		ws = new WebSocket("ws://localhost:9010/game");
 			ws.OnMessage += (s, e) =>
 			{
 				Debug.Log(string.Format("Response: {0}", e.Data));
 
-				var response = JObject.Parse(e.Data);
-				
-				Debug.LogWarning("C: " + response["command"] + "S: " + response["sucess"] );
+			try
+			{
+				var br = JObject.Parse(e.Data);
+
+				Debug.LogWarning("C: " + br["command"] + " S: " + br["sucess"] +"." );
+
+				string command=br["command"].ToString();
+
+				switch (command)
+				{
+				case "player/registration": 
+					if (JsonConvert.DeserializeObject<RegistrationResponseDTO>(e.Data).Success)	LoginPanelsUI.SetState(LoginPanelsUI.State.Login);
+					break;		
+				case "player/authorization":
+
+					var authResponse=JsonConvert.DeserializeObject<AuthorizationResponseDTO>(e.Data);
+
+					Debug.LogWarning(authResponse.Success);
+
+					if (authResponse.Success)
+					{
+						token = authResponse.Payload.Token;
+						LoginPanelsUI.SetState(LoginPanelsUI.State.Dummy);
+					}
+
+					break;	
+				default:
+					Debug.LogError("UNCNOWN C: " + br["command"]);
+					break;
+				}
+
+			}
+
+			catch (Exception ex)
+
+			{
+				Debug.LogError(ex.ToString());
+			}
 
 			};
 			ws.OnOpen += (s, e) =>
@@ -82,5 +118,7 @@ public class LoginIO : MonoBehaviour {
 		Debug.Log(JsonConvert.SerializeObject(request));
 
 		ws.Send(JsonConvert.SerializeObject(request));
+
+		Application.Quit();
 	}
 }
