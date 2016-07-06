@@ -54,6 +54,9 @@ public class LoginIO : MonoBehaviour {
 					{
 						token = authResponse.Payload.Token;
 						LoginPanelsUI.SetState(LoginPanelsUI.State.Dummy);
+
+						//TODO task manager. Below cannot be called from socket.
+						//PlayerData.Save();
 					}
 
 					break;	
@@ -102,7 +105,13 @@ public class LoginIO : MonoBehaviour {
 		request.Command = "player/authorization";
 		request.Payload = new AuthorizationRequestDTO.Data();
 		request.Payload.Name = name;
-		request.Payload.Password = SHA256Hash.HashString(password);
+
+		Debug.Log(password.Length);
+
+		if (password==GC.PASS_DUMMY)
+			request.Payload.Password = PlayerData.Saved.passwordHash;
+		else
+			request.Payload.Password = SHA256Hash.HashString(password);
 
 		Debug.Log(JsonConvert.SerializeObject(request));
 
