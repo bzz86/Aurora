@@ -1,13 +1,17 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\UI\LoginPanelsUI.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\UI\DeckBuilder\DeckListLoader.cs">
     <Files>
-      <File FileName="Assets\Scripts\UI\LoginPanelsUI.cs" Line="92" Column="41" />
-      <File FileName="Assets\Scripts\PlayerData.cs" Line="36" Column="1" />
-      <File FileName="Assets\Scripts\Networking\LoginIO.cs" Line="116" Column="1" />
-      <File FileName="..\..\..\Parchis\Assets\Scripts\RG\BaseGameData.cs" Line="1" Column="1" />
-      <File FileName="..\..\..\Parchis\Assets\Scripts\Core\GameData.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GC.cs" Line="9" Column="43" />
+      <File FileName="Assets\Scripts\Networking\NetworkClient.cs" Line="122" Column="15" />
+      <File FileName="Assets\Scripts\Networking\LoginIO.cs" Line="24" Column="1" />
+      <File FileName="Assets\Scripts\Networking\DeckBuilderIO.cs" Line="7" Column="1" />
+      <File FileName="Assets\Scripts\PlayerData\PlayerData.cs" Line="17" Column="33" />
+      <File FileName="Assets\Scripts\Utils\TaskExecutorScript.cs" Line="22" Column="34" />
+      <File FileName="Assets\Scripts\UI\Common\Card.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\UI\Common\Item.cs" Line="4" Column="23" />
+      <File FileName="Assets\Scripts\Networking\Converters\ItemConverter.cs" Line="39" Column="1" />
+      <File FileName="Assets\Scripts\UI\DeckBuilder\DeckListLoader.cs" Line="26" Column="17" />
+      <File FileName="Assets\Scripts\UI\Login\LoginPanelsUI.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

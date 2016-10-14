@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.UI;
 using Sun.DTO.Helpers;
@@ -69,7 +70,7 @@ public class LoginPanelsUI : MonoBehaviour {
 
 	public void btnRegister()
 	{
-		LoginIO.SendRegistration(
+		LoginIO.getInstance().SendRegistration(
 			ifName.text,
 			ifEmail.text,
 			ifPass.text);
@@ -97,7 +98,7 @@ public class LoginPanelsUI : MonoBehaviour {
 
 			PlayerData.Save();
 
-			LoginIO.SendAuthorization(
+			LoginIO.getInstance().SendAuthorization(
 				ifLogin.text,
 				ifPassword.text);
 
@@ -105,12 +106,13 @@ public class LoginPanelsUI : MonoBehaviour {
 		else
 		{
 			//TODO visualize the reason of the issue
-			Debug.LogError("Login and/or password to short! Please check if it is OK.");
+			Debug.LogError("Login and/or password too short! Please check if it is OK.");
 		}
 	}
 
 	public void btnLogOut()
 	{
-		LoginIO.SendExit();
+		LoginIO.getInstance().SendExit();
 	}
+
 }
