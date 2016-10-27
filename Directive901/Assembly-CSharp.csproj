@@ -45,22 +45,35 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\D901\D901Application.cs" />
+     <Compile Include="Assets\Scripts\D901\D901BaseObject.cs" />
+     <Compile Include="Assets\Scripts\D901\controller\D901Controller.cs" />
+     <Compile Include="Assets\Scripts\D901\controller\DeckBuilder\DeckBuilderUI.cs" />
+     <Compile Include="Assets\Scripts\D901\controller\Login\LoginController.cs" />
+     <Compile Include="Assets\Scripts\D901\controller\Login\LoginPanelsUI.cs" />
+     <Compile Include="Assets\Scripts\D901\controller\ServerNotification.cs" />
+     <Compile Include="Assets\Scripts\D901\controller\TestController.cs" />
+     <Compile Include="Assets\Scripts\D901\model\Card.cs" />
+     <Compile Include="Assets\Scripts\D901\model\CardItem.cs" />
+     <Compile Include="Assets\Scripts\D901\model\D901Model.cs" />
+     <Compile Include="Assets\Scripts\D901\model\Deck.cs" />
+     <Compile Include="Assets\Scripts\D901\model\PlayerData.cs" />
+     <Compile Include="Assets\Scripts\D901\model\TestModel.cs" />
+     <Compile Include="Assets\Scripts\D901\services\Networking\Converters\ItemConverter.cs" />
+     <Compile Include="Assets\Scripts\D901\services\Networking\DeckBuilderIO.cs" />
+     <Compile Include="Assets\Scripts\D901\services\Networking\LoginIO.cs" />
+     <Compile Include="Assets\Scripts\D901\services\Networking\NetworkClient.cs" />
+     <Compile Include="Assets\Scripts\D901\services\Networking\TestService.cs" />
+     <Compile Include="Assets\Scripts\D901\services\Utils\Singleton.cs" />
+     <Compile Include="Assets\Scripts\D901\services\Utils\TaskExecutorScript.cs" />
+     <Compile Include="Assets\Scripts\D901\view\D901View.cs" />
+     <Compile Include="Assets\Scripts\D901\view\TestView.cs" />
      <Compile Include="Assets\Scripts\Extra\Sun.DTO\Helpers\GuidConverter.cs" />
      <Compile Include="Assets\Scripts\Extra\Sun.DTO\Helpers\SHA256Hash.cs" />
      <Compile Include="Assets\Scripts\Extra\Sun.DTO\Helpers\TimestampConverter.cs" />
      <Compile Include="Assets\Scripts\Extra\Sun.DTO\Properties\AssemblyInfo.cs" />
      <Compile Include="Assets\Scripts\GC.cs" />
-     <Compile Include="Assets\Scripts\Networking\Converters\ItemConverter.cs" />
-     <Compile Include="Assets\Scripts\Networking\DeckBuilderIO.cs" />
-     <Compile Include="Assets\Scripts\Networking\LoginIO.cs" />
-     <Compile Include="Assets\Scripts\Networking\NetworkClient.cs" />
-     <Compile Include="Assets\Scripts\PlayerData\PlayerData.cs" />
      <Compile Include="Assets\Scripts\Tests\TestSave.cs" />
-     <Compile Include="Assets\Scripts\UI\Common\Card.cs" />
-     <Compile Include="Assets\Scripts\UI\Common\Item.cs" />
-     <Compile Include="Assets\Scripts\UI\DeckBuilder\DeckBuilderUI.cs" />
-     <Compile Include="Assets\Scripts\UI\Login\LoginPanelsUI.cs" />
-     <Compile Include="Assets\Scripts\Utils\TaskExecutorScript.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TestSave : MonoBehaviour {
+public class TestSave : D901BaseObject {
 
 //	string id="data";
 //
