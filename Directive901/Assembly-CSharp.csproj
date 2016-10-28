@@ -50,7 +50,6 @@
      <Compile Include="Assets\Scripts\D901\controller\D901Controller.cs" />
      <Compile Include="Assets\Scripts\D901\controller\DeckBuilder\DeckBuilderUI.cs" />
      <Compile Include="Assets\Scripts\D901\controller\Login\LoginController.cs" />
-     <Compile Include="Assets\Scripts\D901\controller\Login\LoginPanelsUI.cs" />
      <Compile Include="Assets\Scripts\D901\controller\ServerNotification.cs" />
      <Compile Include="Assets\Scripts\D901\controller\TestController.cs" />
      <Compile Include="Assets\Scripts\D901\model\Card.cs" />
@@ -61,12 +60,13 @@
      <Compile Include="Assets\Scripts\D901\model\TestModel.cs" />
      <Compile Include="Assets\Scripts\D901\services\Networking\Converters\ItemConverter.cs" />
      <Compile Include="Assets\Scripts\D901\services\Networking\DeckBuilderIO.cs" />
-     <Compile Include="Assets\Scripts\D901\services\Networking\LoginIO.cs" />
+     <Compile Include="Assets\Scripts\D901\services\Networking\LoginService.cs" />
      <Compile Include="Assets\Scripts\D901\services\Networking\NetworkClient.cs" />
      <Compile Include="Assets\Scripts\D901\services\Networking\TestService.cs" />
      <Compile Include="Assets\Scripts\D901\services\Utils\Singleton.cs" />
      <Compile Include="Assets\Scripts\D901\services\Utils\TaskExecutorScript.cs" />
      <Compile Include="Assets\Scripts\D901\view\D901View.cs" />
+     <Compile Include="Assets\Scripts\D901\view\LoginView.cs" />
      <Compile Include="Assets\Scripts\D901\view\TestView.cs" />
      <Compile Include="Assets\Scripts\Extra\Sun.DTO\Helpers\GuidConverter.cs" />
      <Compile Include="Assets\Scripts\Extra\Sun.DTO\Helpers\SHA256Hash.cs" />

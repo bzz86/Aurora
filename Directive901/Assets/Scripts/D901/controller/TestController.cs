@@ -3,7 +3,7 @@ using System.Collections;
 
 public class TestController : D901Controller {
 
-	TestService testService = TestService.getInstance();
+	//TestService testService = TestService.getInstance();
 
 	public override void OnServerNotification (string commandName, string data)
 	{

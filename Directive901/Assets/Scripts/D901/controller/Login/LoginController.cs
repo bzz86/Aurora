@@ -3,10 +3,9 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using Newtonsoft.Json;
 using Sun.DTO.Responses;
+using Sun.DTO.Helpers;
 
 public class LoginController : D901Controller {
-
-	LoginIO loginService = LoginIO.getInstance();
 
 	public override void OnServerNotification (string commandName, string data)
 	{
@@ -20,7 +19,7 @@ public class LoginController : D901Controller {
 			Debug.LogWarning (registrationResponse.Success);
 
 			if (registrationResponse.Success) {
-				app.view.loginPanels.SetState (LoginPanelsUI.State.Login);
+				app.view.loginPanels.SetState (LoginView.State.Login);
 			}
 			/*if(app.model.bounces >= app.model.winCondition)
 			{
@@ -81,5 +80,53 @@ public class LoginController : D901Controller {
 		throw new System.NotImplementedException ();
 	}
 
+
+	public void btnRegister()
+	{
+		//app.controller.loginController.S
+		LoginService.getInstance().SendRegistration(
+			app.view.loginPanels.ifName.text,
+			app.view.loginPanels.ifEmail.text,
+			app.view.loginPanels.ifPass.text);
+	}
+
+	public void btnLogin()
+	{
+		if ((app.view.loginPanels.ifLogin.text.Length>=GC.MIN_LENGTH) 
+			&& (app.view.loginPanels.ifPassword.text.Length>=GC.MIN_LENGTH))
+		{
+
+			PlayerData.Saved.name=app.view.loginPanels.ifLogin.text;
+
+			if (app.view.loginPanels.tglRemember.isOn)
+			{
+				if (app.view.loginPanels.ifPassword.text!=GC.PASS_DUMMY)
+				{
+					string hash=SHA256Hash.HashString(app.view.loginPanels.ifPassword.text);
+					if (PlayerData.Saved.passwordHash != hash)
+						PlayerData.Saved.passwordHash=hash;
+				}
+			}
+
+			PlayerData.Saved.remember=app.view.loginPanels.tglRemember.isOn;	
+
+			PlayerData.Save();
+
+			LoginService.getInstance().SendAuthorization(
+				app.view.loginPanels.ifLogin.text,
+				app.view.loginPanels.ifPassword.text);
+
+		}
+		else
+		{
+			//TODO visualize the reason of the issue
+			Debug.LogError("Login and/or password too short! Please check if it is OK.");
+		}
+	}
+
+	public void btnLogOut()
+	{
+		LoginService.getInstance().SendExit();
+	}
 
 }

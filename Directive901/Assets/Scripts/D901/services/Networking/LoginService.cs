@@ -8,21 +8,20 @@ using System;
 using Sun.DTO.Responses;
 using Newtonsoft.Json.Linq;
 
-public class LoginIO : D901BaseObject {
+public class LoginService {
 
-	private static LoginIO instance;
-	private NetworkClient client;
+	private static NetworkClient client = NetworkClient.getInstance();
+	private static LoginService instance;
 
-	void Awake(){
-		instance = this;
+
+	private LoginService(){
+		client = NetworkClient.getInstance ();
 	}
 
-	void Start(){
-		client = NetworkClient.getInstance();
-	}
-
-	public static LoginIO getInstance()
-	{
+	public static LoginService getInstance(){
+		if (instance == null || client == null) {
+			instance = new LoginService ();
+		}		
 		return instance;
 	}
 
@@ -43,8 +42,6 @@ public class LoginIO : D901BaseObject {
 
 	public void SendAuthorization(string name="test", string password="test")
 	{
-
-		Debug.Log ("ws =" + client.getWs());
 		var request = new AuthorizationRequestDTO();
 		request.Command = "player/authorization";
 		request.Payload = new AuthorizationRequestDTO.Data();
