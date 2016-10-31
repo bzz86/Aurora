@@ -1,16 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using Sun.CardProtos;
 using UnityEngine.UI;
+using Sun.CardProtos;
 using Sun.DTO.Entities;
 
-public class DeckBuilderUI : D901BaseObject {
+public class DeckBuilderView : D901BaseObject {
 
-
-	[SerializeField] InputField ifDeckName;
-	public static DeckBuilderUI instance;
-
+	[SerializeField] public InputField ifDeckName;
+	private CardProtosRepository protoRepository = new CardProtosRepository();
 	//public HangarUI hangarUi;
 
 	public Transform deckPrefab;
@@ -18,18 +16,13 @@ public class DeckBuilderUI : D901BaseObject {
 	public Transform bigCardPrefab;
 	public Transform hqContainer;
 
-	public List<CardItem> hqs;
+	private List<CardItem> hqs;
 	public int selectedHq;
-	private CardProtosRepository protoRepository;
 
 	Card hqCard;
 
-
-	void Awake(){instance=this;}
-
 	void Start () {
-		protoRepository = new CardProtosRepository ();
-		//hqs = app.model.playerData.Saved.hqList;
+		hqs = PlayerData.Saved.hqList;
 
 		Transform hqInstance;
 		if (bigCardPrefab != null && hqContainer != null) {
@@ -52,10 +45,8 @@ public class DeckBuilderUI : D901BaseObject {
 		 */
 	}
 
-
-	public static DeckBuilderUI getInstance()
-	{
-		return instance;
+	public CardItem getSelectedHq(){
+		return hqs[selectedHq];
 	}
 
 	public void btnHqMoveLeft()
@@ -83,24 +74,8 @@ public class DeckBuilderUI : D901BaseObject {
 	}
 
 
-	public void btnCreateDeckClick(){
-		if (ifDeckName.text.Length > 0) {
-			DeckBuilderIO.getInstance ().SaveDeck (
-				null,
-				ifDeckName.text,
-				hqs [selectedHq].ProtoID,
-				new CardItem[] { }
-			);
-		} else {
-			//TODO visualize the reason of the issue
-			Debug.LogError("Deck name cant be empty");
-		}
-	}
-
-
-
 	private void refreshHq(){
-		CardItem item = hqs[selectedHq];
+		CardItem item = getSelectedHq();
 		Proto cardProto = protoRepository [item.ProtoID];
 		hqCard.Title = cardProto.ID;
 		hqCard.updateValues ();

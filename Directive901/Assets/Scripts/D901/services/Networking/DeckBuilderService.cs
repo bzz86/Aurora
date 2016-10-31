@@ -6,21 +6,20 @@ using Sun.DTO.Responses;
 using Sun.DTO.Entities;
 using Aurora.Networking.Converters;
 
-public class DeckBuilderIO : MonoBehaviour {
+public class DeckBuilderService : D901BaseObject {
 
-	private static DeckBuilderIO instance;
-	private NetworkClient client;
+	private static NetworkClient client = NetworkClient.getInstance();
+	private static DeckBuilderService instance;
 
-	void Awake(){
-		instance = this;
+
+	private DeckBuilderService(){
+		client = NetworkClient.getInstance ();
 	}
 
-	void Start(){
-		client = NetworkClient.getInstance();
-	}
-
-	public static DeckBuilderIO getInstance()
-	{
+	public static DeckBuilderService getInstance(){
+		if (instance == null || client == null) {
+			instance = new DeckBuilderService ();
+		}		
 		return instance;
 	}
 

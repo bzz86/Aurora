@@ -19,7 +19,7 @@ public class NetworkClient : D901BaseObject{
 	private WebSocket ws;
 	private Guid token;
 	//private TaskExecutorScript taskExecutorScript;
-	private CardProtosRepository protoRepository = new CardProtosRepository ();
+	//private CardProtosRepository protoRepository = new CardProtosRepository ();
 
 	void Awake(){
 		if (instance != null && instance != this) {
