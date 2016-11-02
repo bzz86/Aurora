@@ -10,7 +10,7 @@ public class Deck {
 	public List<CardItem> Cards;
 
 	[JsonProperty ("hq")]
-	public CardItem HQ;
+	public string HQ;
 
 	[JsonProperty ("deck_id")]
 	public long? ID;
@@ -19,4 +19,13 @@ public class Deck {
 	public string Title;
 
 	public Deck () {}
+
+	public Deck (long? iD, string title, string hQ, List<CardItem> cards)
+	{
+		this.Cards = cards;
+		this.HQ = hQ;
+		this.ID = iD;
+		this.Title = title;
+	}
+	
 }

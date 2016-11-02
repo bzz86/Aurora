@@ -16,22 +16,17 @@ public class DeckBuilderView : D901BaseObject {
 	public Transform bigCardPrefab;
 	public Transform hqContainer;
 
+
+	private List<DeckDTO> decks;
 	private List<CardItem> hqs;
-	public int selectedHq;
+	private int selectedHq;
 
 	Card hqCard;
 
 	void Start () {
-		hqs = PlayerData.Saved.hqList;
-
-		Transform hqInstance;
-		if (bigCardPrefab != null && hqContainer != null) {
-			hqInstance = Instantiate (bigCardPrefab);
-			hqCard = hqInstance.GetComponent<Card> ();
-			refreshHq ();
-			hqInstance.SetParent(hqContainer, false);
-		}
-
+		
+		loadHqs ();
+		reloadDecks ();
 
 		/*
 		 for ( int i = 0; i < 3; i++ ) {
@@ -74,11 +69,44 @@ public class DeckBuilderView : D901BaseObject {
 	}
 
 
+	public void loadHqs(){
+		hqs = PlayerData.Saved.hqList;
+
+		Transform hqInstance;
+		if (bigCardPrefab != null && hqContainer != null) {
+			hqInstance = Instantiate (bigCardPrefab);
+			hqCard = hqInstance.GetComponent<Card> ();
+			refreshHq ();
+			hqInstance.SetParent(hqContainer, false);
+		}
+	}
+
 	private void refreshHq(){
 		CardItem item = getSelectedHq();
 		Proto cardProto = protoRepository [item.ProtoID];
 		hqCard.Title = cardProto.ID;
 		hqCard.updateValues ();
+	}
+
+	public void reloadDecks(){
+		decks = PlayerData.Saved.deckList;
+		Transform deckInstance;
+		if (decks != null) {
+			Debug.Log ("decks number = " + decks.Count);
+
+			removeChildren (deckList);
+			foreach (DeckDTO deck in decks) {
+				addDeckToList (deck);	
+			}
+		}
+	}
+
+	private void removeChildren(Transform parent){
+		if (parent != null) {
+			foreach (Transform child in parent) {
+				GameObject.Destroy (child.gameObject);
+			}
+		}
 	}
 
 	public void addDeckToList(DeckDTO deck){

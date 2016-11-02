@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using Sun.DTO.Entities;
 using Sun.DTO.Responses;
 using Newtonsoft.Json;
+using Aurora.Networking.Converters;
 
 public class DeckBuilderController : D901Controller {
 
@@ -28,20 +29,28 @@ public class DeckBuilderController : D901Controller {
 	public override void OnServerNotification (string commandName, string data)
 	{
 		switch (commandName) {
-			case "decks/list":
+			case ServerNotification.DECKS_LIST:
+				Debug.Log ("DeckBuilderController caught DECK_LIST");
 				DecksListResponseDTO deckListResponse = JsonConvert.DeserializeObject<DecksListResponseDTO>(data);
 				if(deckListResponse.Success){
+					
 					TaskExecutorScript.getInstance().ScheduleTask(new Task(delegate
 						{
-							foreach(DeckDTO deck in deckListResponse.Payload.Decks){
+							List<DeckDTO> decks = new List<DeckDTO>(deckListResponse.Payload.Decks);
+						Debug.Log ("decks number before save = " + decks.Count);
+							PlayerData.Saved.deckList = decks;
+							PlayerData.Save();
+							app.view.deckBuilder.reloadDecks();
+							/*foreach(DeckDTO deck in deckListResponse.Payload.Decks){
 								app.view.deckBuilder.addDeckToList(deck);	
-							}
+							}*/
 						}
 					));	
 				}
 				break;
 
-			case "research/list":
+			case ServerNotification.RESEARCH_LIST:
+				Debug.Log ("DeckBuilderController caught RESEARCH_LIST");
 				ResearchListResponseDTO researchListResponse = JsonConvert.DeserializeObject<ResearchListResponseDTO>(data);
 				ResearchListResponseDTO.Item[] items = researchListResponse.Payload.Items;
 
@@ -70,17 +79,20 @@ public class DeckBuilderController : D901Controller {
 						PlayerData.Saved.hqList = hqList;
 						PlayerData.Saved.cardList = cardList;
 						PlayerData.Save();
-						//SceneManager.LoadScene(1);	
+						app.view.deckBuilder.loadHqs();
 					}
 				));
 
 				break;
 
-			case "decks/save":
+			case ServerNotification.DECKS_SAVE:
+				Debug.Log ("DeckBuilderController caught DECK_SAVE");
 				DecksSaveResponseDTO deckSaveResponse = JsonConvert.DeserializeObject<DecksSaveResponseDTO>(data);
 				if(deckSaveResponse.Success){
 					TaskExecutorScript.getInstance().ScheduleTask(new Task(delegate
 						{
+							PlayerData.Saved.deckList.Add(deckSaveResponse.Deck);
+							PlayerData.Save();
 							app.view.deckBuilder.addDeckToList(deckSaveResponse.Deck);
 						}
 					));

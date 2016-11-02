@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using Newtonsoft.Json;
+using Sun.DTO.Requests;
 using Sun.DTO.Responses;
 using Sun.DTO.Helpers;
 
@@ -38,32 +39,21 @@ public class LoginController : D901Controller {
 			Debug.LogWarning (authResponse.Success);
 
 			if (authResponse.Success) {
-				//PlayerData.token = authResponse.Payload.Token;
+				PlayerData.Saved.token = authResponse.Payload.Token;
 				//LoginPanelsUI.SetState(LoginPanelsUI.State.Dummy);
+				Debug.LogWarning("PlayerData.Saved.token=" + PlayerData.Saved.token);
 
 				TaskExecutorScript.getInstance ().ScheduleTask (new Task (delegate {
 					PlayerData.Save ();
 
 					//success auth => call research list and deck list
-					/*ResearchListRequestDTO researchReq = new ResearchListRequestDTO ();
-					researchReq.Command = "research/list";
-					researchReq.Token = token;
-
-					Debug.Log (JsonConvert.SerializeObject (researchReq));
-
-					ws.Send (JsonConvert.SerializeObject (researchReq));
 
 
-					DecksListRequestDTO deckListReq = new DecksListRequestDTO ();
-					deckListReq.Command = "decks/list";
-					deckListReq.Token = token;
-
-					Debug.Log (JsonConvert.SerializeObject (deckListReq));
-
-					ws.Send (JsonConvert.SerializeObject (deckListReq));
-*/
+					DeckBuilderService.getInstance().GetResearchList();
+					DeckBuilderService.getInstance().GetDeckList();
 
 					SceneManager.LoadScene (1);
+					//SceneLoader.getInstance().loadSceneById(1);
 				}
 				));
 			}

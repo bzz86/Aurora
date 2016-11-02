@@ -6,7 +6,7 @@ using Sun.DTO.Responses;
 using Sun.DTO.Entities;
 using Aurora.Networking.Converters;
 
-public class DeckBuilderService : D901BaseObject {
+public class DeckBuilderService {
 
 	private static NetworkClient client = NetworkClient.getInstance();
 	private static DeckBuilderService instance;
@@ -54,7 +54,7 @@ public class DeckBuilderService : D901BaseObject {
 		request.Deck.ID = id; 
 		request.Deck.HQ = hq;
 		request.Deck.Title = title;
-		request.Deck.Cards = ItemConverter.getDeckCardFromItem (cards); 
+		request.Deck.Cards = DeckConverter.getDeckCardsFromItems (cards); 
 
 
 		Debug.Log(JsonConvert.SerializeObject(request));

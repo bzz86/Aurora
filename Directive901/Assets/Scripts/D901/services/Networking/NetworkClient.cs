@@ -18,8 +18,6 @@ public class NetworkClient : D901BaseObject{
 	private static NetworkClient instance;
 	private WebSocket ws;
 	private Guid token;
-	//private TaskExecutorScript taskExecutorScript;
-	//private CardProtosRepository protoRepository = new CardProtosRepository ();
 
 	void Awake(){
 		if (instance != null && instance != this) {
@@ -33,9 +31,7 @@ public class NetworkClient : D901BaseObject{
 
 	void Start(){
 		CreateWebSoket();
-		//token = ;
-		//taskExecutorScript = GameObject.Find("####TaskExecutor").transform.GetComponent<TaskExecutorScript> ();
-		//protoRepository = new CardProtosRepository ();
+		reloadToken ();
 	}
 
 	public static NetworkClient getInstance()
@@ -52,6 +48,10 @@ public class NetworkClient : D901BaseObject{
 
 	public Guid getToken () {
 		return this.token;
+	}
+
+	public void reloadToken() {
+		this.token = PlayerData.Saved.token;
 	}
 
 	private void CreateWebSoket()
@@ -210,6 +210,11 @@ public class NetworkClient : D901BaseObject{
 	}
 
 	public void Send(string data){
+		Debug.Log ("token=" + token);
+		Debug.Log (PlayerData.Saved);
+		if (token == null) {
+			token = PlayerData.Saved.token;
+		}
 		ws.Send (data);
 	}
 

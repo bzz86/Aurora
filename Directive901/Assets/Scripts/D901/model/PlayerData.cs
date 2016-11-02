@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sun.DTO.Entities;
 
 using Newtonsoft.Json;
 
@@ -14,8 +15,8 @@ public class PlayerData {
 	[JsonProperty]public string passwordHash="";
 	[JsonProperty]public string email="";
 	[JsonProperty]public bool remember=false;
-	[JsonProperty]public  Guid token;
-	[JsonProperty]public List<Deck> deckList;
+	[JsonProperty]public Guid token;
+	[JsonProperty]public List<DeckDTO> deckList;
 	[JsonProperty]public List<CardItem> hqList;
 	[JsonProperty]public List<CardItem> cardList;
 

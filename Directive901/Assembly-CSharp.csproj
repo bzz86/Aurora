@@ -58,7 +58,7 @@
      <Compile Include="Assets\Scripts\D901\model\Deck.cs" />
      <Compile Include="Assets\Scripts\D901\model\PlayerData.cs" />
      <Compile Include="Assets\Scripts\D901\model\TestModel.cs" />
-     <Compile Include="Assets\Scripts\D901\services\Networking\Converters\ItemConverter.cs" />
+     <Compile Include="Assets\Scripts\D901\services\Networking\Converters\DeckConverter.cs" />
      <Compile Include="Assets\Scripts\D901\services\Networking\DeckBuilderService.cs" />
      <Compile Include="Assets\Scripts\D901\services\Networking\LoginService.cs" />
      <Compile Include="Assets\Scripts\D901\services\Networking\NetworkClient.cs" />
