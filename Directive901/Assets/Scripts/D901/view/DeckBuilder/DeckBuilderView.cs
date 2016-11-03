@@ -8,18 +8,20 @@ using Sun.DTO.Entities;
 public class DeckBuilderView : D901BaseObject {
 
 	[SerializeField] public InputField ifDeckName;
+
+	[SerializeField] public Transform deckPrefab;
+	[SerializeField] public Transform deckList;
+	[SerializeField] public Transform bigCardPrefab;
+	[SerializeField] public Transform hqContainer;
+	[SerializeField] public Transform hqSelector;
+	[SerializeField] public Transform deckInfo;
+
 	private CardProtosRepository protoRepository = new CardProtosRepository();
-	//public HangarUI hangarUi;
-
-	public Transform deckPrefab;
-	public Transform deckList;
-	public Transform bigCardPrefab;
-	public Transform hqContainer;
-
-
 	private List<DeckDTO> decks;
 	private List<CardItem> hqs;
 	private int selectedHq;
+
+	private long? selectedDeck;
 
 	Card hqCard;
 
@@ -27,17 +29,6 @@ public class DeckBuilderView : D901BaseObject {
 		
 		loadHqs ();
 		reloadDecks ();
-
-		/*
-		 for ( int i = 0; i < 3; i++ ) {
-			if (deckPrefab != null && deckList != null) {
-				deckInstance = Instantiate (deckPrefab);
-
-				//instance.GetComponent<Card>().Title = "TEST";
-				deckInstance.SetParent(deckList, false);
-			}
-		} 
-		 */
 	}
 
 	public CardItem getSelectedHq(){
@@ -88,6 +79,14 @@ public class DeckBuilderView : D901BaseObject {
 		hqCard.updateValues ();
 	}
 
+	private void refreshDeckInfo(DeckDTO deck){
+		Proto cardProto = protoRepository [deck.HQ];
+		//TODO correct use of deckInfo prefab necessary
+		Card hqCard = deckInfo.GetComponentInChildren<Card> ();
+		hqCard.Title = cardProto.ID;
+		hqCard.updateValues ();
+	}
+
 	public void reloadDecks(){
 		decks = PlayerData.Saved.deckList;
 		Transform deckInstance;
@@ -101,6 +100,17 @@ public class DeckBuilderView : D901BaseObject {
 		}
 	}
 
+	private DeckDTO getDeckById(long? id){
+		if (id != null) {
+			foreach (DeckDTO deck in decks) {
+				if (deck.ID == id) {
+					return deck;
+				}
+			}		
+		}
+		return null;
+	}
+
 	private void removeChildren(Transform parent){
 		if (parent != null) {
 			foreach (Transform child in parent) {
@@ -112,9 +122,34 @@ public class DeckBuilderView : D901BaseObject {
 	public void addDeckToList(DeckDTO deck){
 		if (deckPrefab != null && deckList != null) {
 			Transform deckInstance = Instantiate (deckPrefab);
-			deckInstance.GetComponentInChildren<Text> ().text = deck.Title;
+			//deckInstance.GetComponentInChildren<Text> ().text = deck.Title;
+			deckInstance.GetComponent<DeckListElement> ().Init(deck.ID, null, deck.Title, 1234);
 			//deckInstance.GetComponent<Card>().Title = deck.Title;
 			deckInstance.SetParent(deckList, false);
 		}
+	}
+
+	public void btnBackgroundClick(){
+		Debug.Log ("bg click");
+		deselectDeck ();
+	}
+
+	public void selectDeck(long? ID)
+	{
+		Debug.Log ("select Deck");
+		if (this.selectedDeck != ID) {
+			this.selectedDeck = ID;
+			refreshDeckInfo (getDeckById(this.selectedDeck));
+			this.hqSelector.gameObject.SetActive (false);
+			this.deckInfo.gameObject.SetActive (true);
+		}
+	}
+
+	public void deselectDeck()
+	{
+		Debug.Log ("deselect Deck");
+		selectedDeck = null;
+		this.deckInfo.gameObject.SetActive (false);
+		this.hqSelector.gameObject.SetActive (true);
 	}
 }

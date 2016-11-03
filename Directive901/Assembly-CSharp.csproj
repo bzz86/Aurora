@@ -47,6 +47,9 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\D901\D901Application.cs" />
      <Compile Include="Assets\Scripts\D901\D901BaseObject.cs" />
+     <Compile Include="Assets\Scripts\D901\components\DeckInfo.cs" />
+     <Compile Include="Assets\Scripts\D901\components\DeckListElement.cs" />
+     <Compile Include="Assets\Scripts\D901\components\HqSelector.cs" />
      <Compile Include="Assets\Scripts\D901\controller\D901Controller.cs" />
      <Compile Include="Assets\Scripts\D901\controller\DeckBuilder\DeckBuilderController.cs" />
      <Compile Include="Assets\Scripts\D901\controller\Login\LoginController.cs" />
@@ -67,8 +70,8 @@
      <Compile Include="Assets\Scripts\D901\services\Utils\Singleton.cs" />
      <Compile Include="Assets\Scripts\D901\services\Utils\TaskExecutorScript.cs" />
      <Compile Include="Assets\Scripts\D901\view\D901View.cs" />
-     <Compile Include="Assets\Scripts\D901\view\DeckBuilderView.cs" />
-     <Compile Include="Assets\Scripts\D901\view\LoginView.cs" />
+     <Compile Include="Assets\Scripts\D901\view\DeckBuilder\DeckBuilderView.cs" />
+     <Compile Include="Assets\Scripts\D901\view\Login\LoginView.cs" />
      <Compile Include="Assets\Scripts\D901\view\TestView.cs" />
      <Compile Include="Assets\Scripts\Extra\Sun.DTO\Helpers\GuidConverter.cs" />
      <Compile Include="Assets\Scripts\Extra\Sun.DTO\Helpers\SHA256Hash.cs" />
