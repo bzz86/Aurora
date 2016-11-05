@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class Card : MonoBehaviour {
+public class CardSample : MonoBehaviour {
 
 	public Text title;
 	public Text description;

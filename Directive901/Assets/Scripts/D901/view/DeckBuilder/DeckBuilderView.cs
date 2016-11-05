@@ -75,16 +75,23 @@ public class DeckBuilderView : D901BaseObject {
 	private void refreshHq(){
 		CardItem item = getSelectedHq();
 		Proto cardProto = protoRepository [item.ProtoID];
-		hqCard.Title = cardProto.ID;
-		hqCard.updateValues ();
+		//TODO fix it
+		/*hqCard.Init (cardProto.ID,
+			null,
+			cardProto.ID,
+			cardProto.ID
+		);*/
 	}
 
 	private void refreshDeckInfo(DeckDTO deck){
 		Proto cardProto = protoRepository [deck.HQ];
 		//TODO correct use of deckInfo prefab necessary
 		Card hqCard = deckInfo.GetComponentInChildren<Card> ();
-		hqCard.Title = cardProto.ID;
-		hqCard.updateValues ();
+		hqCard.Init (cardProto.ID,
+			null,
+			cardProto.ID,
+			cardProto.ID
+		);
 	}
 
 	public void reloadDecks(){

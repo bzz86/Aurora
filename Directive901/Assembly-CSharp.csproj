@@ -47,6 +47,9 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\D901\D901Application.cs" />
      <Compile Include="Assets\Scripts\D901\D901BaseObject.cs" />
+     <Compile Include="Assets\Scripts\D901\components\Card.cs" />
+     <Compile Include="Assets\Scripts\D901\components\CollectionCard.cs" />
+     <Compile Include="Assets\Scripts\D901\components\DeckCard.cs" />
      <Compile Include="Assets\Scripts\D901\components\DeckInfo.cs" />
      <Compile Include="Assets\Scripts\D901\components\DeckListElement.cs" />
      <Compile Include="Assets\Scripts\D901\components\HqSelector.cs" />
@@ -55,8 +58,8 @@
      <Compile Include="Assets\Scripts\D901\controller\Login\LoginController.cs" />
      <Compile Include="Assets\Scripts\D901\controller\ServerNotification.cs" />
      <Compile Include="Assets\Scripts\D901\controller\TestController.cs" />
-     <Compile Include="Assets\Scripts\D901\model\Card.cs" />
      <Compile Include="Assets\Scripts\D901\model\CardItem.cs" />
+     <Compile Include="Assets\Scripts\D901\model\CardSample.cs" />
      <Compile Include="Assets\Scripts\D901\model\D901Model.cs" />
      <Compile Include="Assets\Scripts\D901\model\Deck.cs" />
      <Compile Include="Assets\Scripts\D901\model\PlayerData.cs" />
