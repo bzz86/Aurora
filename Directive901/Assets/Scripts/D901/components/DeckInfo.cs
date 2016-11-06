@@ -1,15 +1,34 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
-public class DeckInfo : MonoBehaviour {
+public class DeckInfo : D901BaseObject {
+	[SerializeField] Text deckName;
+	[SerializeField] Card hqCard;
 
-	// Use this for initialization
-	void Start () {
-	
+	private long? id;
+
+
+	public void Init(long? id,
+		string protoId,
+		Sprite art, 
+		string title, 
+		string description,
+		string deckName)
+	{
+		Debug.Log ("DeckInfo init: id = " + id + ", protoId = " + protoId + ", art=" + art + ", title =" + title + ", description =" + description);
+		this.deckName.text = deckName;
+		hqCard.Init (protoId,
+			art,
+			title,
+			description
+		);
+
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	public void btnEditClick(){
+		app.view.deckBuilder.editDeck (id);
 	}
+
+
 }

@@ -14,16 +14,27 @@ public class DeckBuilderController : D901Controller {
 
 	public void btnCreateDeckClick(){
 		if (app.view.deckBuilder.ifDeckName.text.Length > 0) {
-			DeckBuilderService.getInstance ().SaveDeck (
+			app.view.deckBuilder.newDeck ();
+			/*DeckBuilderService.getInstance ().SaveDeck (
 				null,
 				app.view.deckBuilder.ifDeckName.text,
 				app.view.deckBuilder.getSelectedHq().ProtoID,
 				new CardItem[] { }
-			);
+			);*/
 		} else {
 			//TODO visualize the reason of the issue
 			Debug.LogError("Deck name cant be empty");
 		}
+	}
+
+	public void btnEditDeckClick(){
+		app.view.deckBuilder.editDeck (1);
+			/*DeckBuilderService.getInstance ().SaveDeck (
+				null,
+				app.view.deckBuilder.ifDeckName.text,
+				app.view.deckBuilder.getSelectedHq().ProtoID,
+				new CardItem[] { }
+			);*/
 	}
 
 	public override void OnServerNotification (string commandName, string data)

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 using Newtonsoft.Json;
 
-public class Deck {
+public class DeckSample {
 
 	[JsonProperty ("cards")]
 	public List<CardItem> Cards;
@@ -18,9 +18,9 @@ public class Deck {
 	[JsonProperty ("title")]
 	public string Title;
 
-	public Deck () {}
+	public DeckSample () {}
 
-	public Deck (long? iD, string title, string hQ, List<CardItem> cards)
+	public DeckSample (long? iD, string title, string hQ, List<CardItem> cards)
 	{
 		this.Cards = cards;
 		this.HQ = hQ;

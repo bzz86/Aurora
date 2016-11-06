@@ -44,14 +44,14 @@ namespace Aurora.Networking.Converters
 			return card;
 		}
 
-		public static Deck getDeckFromDeckDTO(DeckDTO deckDto){
+		/*public static Deck getDeckFromDeckDTO(DeckDTO deckDto){
 			return new Deck (
 				deckDto.ID,
 				deckDto.Title,
 				deckDto.HQ,
 				getCardItemsFromDeckCards(deckDto.Cards)
 			);
-		}
+		}*/
 
 	}
 }
