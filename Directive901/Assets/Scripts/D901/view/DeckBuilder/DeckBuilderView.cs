@@ -21,13 +21,21 @@ public class DeckBuilderView : D901BaseObject {
 	[SerializeField] public DeckInfo deckInfo;
 	[SerializeField] public Transform deckEditor;
 
+
+	[SerializeField] public Transform collectionCardPrefab;
+	[SerializeField] public Transform collectionContainer;
+
+	[SerializeField] public Transform deckCardPrefab;
+	[SerializeField] public Transform deckCardsContainer;
+
+
 	private CardProtosRepository protoRepository = new CardProtosRepository();
 	private List<DeckDTO> decks;
 	private List<CardItem> hqs;
 	private int selectedHq;
 
 	private DeckDTO currentDeck;
-	private long? selectedDeck;
+	private long? selectedDeck; //seems to be not necessary
 
 	private List<CardItem> collection;
 	private List<CardItem> filteredCollection;
@@ -38,6 +46,8 @@ public class DeckBuilderView : D901BaseObject {
 		
 		loadHqs ();
 		reloadDecks ();
+		collection = PlayerData.Saved.cardList;
+
 	}
 
 	public CardItem getSelectedHq(){
@@ -122,6 +132,7 @@ public class DeckBuilderView : D901BaseObject {
 		}
 	}
 
+
 	private DeckDTO getDeckById(long? id){
 		if (id != null) {
 			foreach (DeckDTO deck in decks) {
@@ -193,6 +204,8 @@ public class DeckBuilderView : D901BaseObject {
 		this.currentDeck.HQ = hq.ProtoID;
 		this.currentDeck.Title = name;
 
+		initCollection ();
+		initDeckCards ();
 		this.deckList.gameObject.SetActive (false);
 		this.deckEditor.gameObject.SetActive (true);
 
@@ -202,12 +215,16 @@ public class DeckBuilderView : D901BaseObject {
 	{
 		this.currentDeck = getDeckById(deckId);
 
+		initCollection ();
+		initDeckCards ();
 		this.deckList.gameObject.SetActive (false);
 		this.deckEditor.gameObject.SetActive (true);
 	}
 
 	public void addToDeck(string protoId)
 	{
+		Debug.Log ("addToDeck, protoId = " + protoId);
+
 		//loop over filtered collection and find by proto
 		for(int i = 0 ; i < this.filteredCollection.Count ; i++){
 			if(this.filteredCollection[i].ProtoID == protoId){
@@ -239,14 +256,52 @@ public class DeckBuilderView : D901BaseObject {
 			this.currentDeck.Cards.Add (card);
 		}
 
-
-
+		Debug.Log ("collection :" + collection);
+		Debug.Log ("filteredCollection :" + filteredCollection);
+		Debug.Log ("deck :" + currentDeck);
+		initCollection ();
+		initDeckCards ();
 
 	}
 
 	public void removeFromDeck(string protoId)
 	{
 		
+	}
+
+
+
+	//collection in the deckbuilder
+	public void initCollection(){
+		//if (collectionCardPrefab != null && collectionContainer != null) {
+		this.filteredCollection = applyFilters(this.collection);
+		removeChildren (collectionContainer);
+			foreach(CardItem item in filteredCollection){
+				Transform collectionCardInstance = Instantiate (collectionCardPrefab);
+				//deckInstance.GetComponentInChildren<Text> ().text = deck.Title;
+				collectionCardInstance.GetComponent<CollectionCard> ().Init(item.ProtoID, null, item.ProtoID, item.ProtoID, item.Count);
+				//deckInstance.GetComponent<Card>().Title = deck.Title;
+				collectionCardInstance.SetParent(collectionContainer, false);
+			}
+		//}
+	}
+
+	public List<CardItem> applyFilters(List<CardItem> collection){
+		//TODO implement filters
+		return collection;
+	}
+
+	public void initDeckCards(){
+		//if (collectionCardPrefab != null && collectionContainer != null) {
+		removeChildren (deckCardsContainer);
+		foreach(DeckDTO.DeckCard item in currentDeck.Cards){
+			Transform deckCardInstance = Instantiate (deckCardPrefab);
+			//deckInstance.GetComponentInChildren<Text> ().text = deck.Title;
+			deckCardInstance.GetComponent<DeckCard> ().Init(item.ProtoID, null, item.ProtoID, item.ProtoID, 1234, item.Count);
+			//deckInstance.GetComponent<Card>().Title = deck.Title;
+			deckCardInstance.SetParent(deckCardsContainer, false);
+		}
+		//}
 	}
 
 }

@@ -10,4 +10,10 @@ public class CollectionCard : Card {
 		Debug.Log("click on collection card " + this.ProtoId);
 		app.view.deckBuilder.addToDeck (this.ProtoId);
 	}
+
+	public void Init (string protoId, Sprite art, string title, string description, int qty)
+	{
+		base.Init (protoId, art, title, description);
+		this.quantity.text = "x" + qty.ToString();
+	}
 }
