@@ -20,10 +20,14 @@ public class DeckCard : Card {
 		this.quantity.text = 'x' + quantity.ToString();
 	}
 
+	public void updateQuantity(int quantity){
+		this.quantity.text = 'x' + quantity.ToString ();
+	}
+
 	public override void OnClickDo()
 	{
 		Debug.Log("click on deck card " + this.ProtoId);
-		//app.view.deckBuilder.selectDeck (this.ProtoId);
+		app.view.deckBuilder.removeFromDeck (this.ProtoId);
 	}
 
 }

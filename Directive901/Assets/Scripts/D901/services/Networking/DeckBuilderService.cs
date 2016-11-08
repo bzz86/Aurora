@@ -45,16 +45,17 @@ public class DeckBuilderService {
 		client.Send(JsonConvert.SerializeObject(request));
 	}
 
-	public void SaveDeck(long? id, string title, string hq, CardItem[] cards)
+	public void SaveDeck(DeckDTO deck /*long? id, string title, string hq, CardItem[] cards*/)
 	{
 		var request = new DecksSaveRequestDTO ();
 		request.Command = "decks/save";
 		request.Token = client.getToken();
-		request.Deck = new DeckDTO();
+		request.Deck = deck;
+		/*request.Deck = new DeckDTO();
 		request.Deck.ID = id; 
 		request.Deck.HQ = hq;
 		request.Deck.Title = title;
-		request.Deck.Cards = DeckConverter.getDeckCardsFromItems (cards); 
+		request.Deck.Cards = DeckConverter.getDeckCardsFromItems (cards); */
 
 
 		Debug.Log(JsonConvert.SerializeObject(request));
