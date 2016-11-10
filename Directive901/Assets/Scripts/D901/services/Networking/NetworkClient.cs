@@ -20,8 +20,14 @@ public class NetworkClient : D901BaseObject{
 	private Guid token;
 
 	void Awake(){
+		Debug.Log ("Network Client awake");
+
 		if (instance != null && instance != this) {
 			DestroyImmediate (gameObject);
+			if (NetworkClient.getInstance() != null && NetworkClient.getInstance().checkStatus() == WebSocketState.Closed) {
+				Debug.Log ("CreateWebSoket");
+				CreateWebSoket();
+			}
 			return;
 		}
 
@@ -30,6 +36,7 @@ public class NetworkClient : D901BaseObject{
 	}
 
 	void Start(){
+		Debug.Log ("Network Client start");
 		CreateWebSoket();
 		reloadToken ();
 	}
@@ -46,6 +53,10 @@ public class NetworkClient : D901BaseObject{
 		return this.ws;
 	}
 
+	public WebSocketState checkStatus(){
+		return this.ws.ReadyState;
+	}
+
 	public Guid getToken () {
 		return this.token;
 	}
@@ -57,7 +68,7 @@ public class NetworkClient : D901BaseObject{
 	private void CreateWebSoket()
 	{
 		Debug.Log ("socket creation start");
-		ws = new WebSocket("ws://localhost:9010/game");
+		ws = new WebSocket("ws://localhost:9011/game");
 
 		ws.OnMessage += (s, e) =>
 		{
@@ -202,9 +213,16 @@ public class NetworkClient : D901BaseObject{
 		{
 			Debug.Log("Open WS");
 		};
+		ws.OnError += (s, e) =>
+		{
+			Debug.Log("WS error: " + e.Message);
+		};
 		ws.OnClose += (s, e) =>
 		{
-			Debug.Log("Close WS");
+			string errorMessage = "Code: " + e.Code + "; reason: " + e.Reason;
+			ConnectionProblems.error = errorMessage;
+			Debug.Log("Close WS. " + errorMessage);
+			SceneManager.LoadScene("ConnectionProblemScene");
 		};
 		ws.Connect();
 	}

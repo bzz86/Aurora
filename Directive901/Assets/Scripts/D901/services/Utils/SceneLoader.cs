@@ -8,8 +8,7 @@ public class SceneLoader : MonoBehaviour {
 	private bool loadScene = false;
 	private int runningProcesses = 0;
 
-	[SerializeField]
-	private Text loadingText;
+	[SerializeField] Text loadingText;
 
 	public GameObject loadingScreen;
 

@@ -1,19 +1,25 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\D901\components\Deck.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\D901\services\Networking\NetworkClient.cs">
     <Files>
-      <File FileName="Assets\Scripts\D901\view\DeckBuilder\DeckBuilderView.cs" Line="215" Column="26" />
-      <File FileName="Assets\Scripts\D901\components\Deck.cs" Line="15" Column="3" />
-      <File FileName="Assets\Scripts\D901\components\CardsCollection.cs" Line="15" Column="53" />
-      <File FileName="Assets\Scripts\D901\controller\D901Controller.cs" Line="6" Column="2" />
-      <File FileName="Assets\Scripts\D901\controller\DeckBuilder\DeckBuilderController.cs" Line="40" Column="1" />
-      <File FileName="Assets\Scripts\D901\services\Networking\DeckBuilderService.cs" Line="48" Column="36" />
-      <File FileName="Assets\Scripts\D901\D901BaseObject.cs" Line="7" Column="2" />
-      <File FileName="Assets\Scripts\D901\components\utils\ViewUtils.cs" Line="9" Column="1" />
+      <File FileName="Assets\Scripts\D901\view\DeckBuilder\DeckBuilderView.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\D901\components\Deck.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\D901\components\CardsCollection.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\D901\controller\D901Controller.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\D901\controller\DeckBuilder\DeckBuilderController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\D901\services\Networking\DeckBuilderService.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\D901\D901BaseObject.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\D901\components\utils\ViewUtils.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\D901\services\Networking\NetworkClient.cs" Line="224" Column="29" />
+      <File FileName="Assets\Scripts\D901\view\ConnectionProblems.cs" Line="12" Column="2" />
+      <File FileName="Assets\Scripts\D901\services\Networking\LoginService.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="D:\Programming\_generals_2_0\Aurora\Aurora\Directive901\Assets\Scripts\D901\services\Networking\NetworkClient.cs" line="40" column="1" />
+      <Breakpoint file="D:\Programming\_generals_2_0\Aurora\Aurora\Directive901\Assets\Scripts\D901\services\Networking\NetworkClient.cs" line="70" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
