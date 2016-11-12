@@ -72,6 +72,7 @@
      <Compile Include="Assets\Scripts\D901\services\Networking\LoginService.cs" />
      <Compile Include="Assets\Scripts\D901\services\Networking\NetworkClient.cs" />
      <Compile Include="Assets\Scripts\D901\services\Networking\TestService.cs" />
+     <Compile Include="Assets\Scripts\D901\services\Utils\D901Singleton.cs" />
      <Compile Include="Assets\Scripts\D901\services\Utils\SceneLoader.cs" />
      <Compile Include="Assets\Scripts\D901\services\Utils\Singleton.cs" />
      <Compile Include="Assets\Scripts\D901\services\Utils\TaskExecutorScript.cs" />

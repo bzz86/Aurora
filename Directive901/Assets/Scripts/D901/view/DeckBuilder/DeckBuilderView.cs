@@ -21,8 +21,8 @@ public class DeckBuilderView : D901BaseObject {
 	[SerializeField] public DeckInfo deckInfo;
 
 	[SerializeField] public Transform deckEditor;
-	[SerializeField] CardsCollection collectionComponent;
-	[SerializeField] Deck deckComponent; 
+	[SerializeField] public CardsCollection collectionComponent;
+	[SerializeField] public Deck deckComponent; 
 
 
 	private CardProtosRepository protoRepository = new CardProtosRepository();
@@ -31,19 +31,23 @@ public class DeckBuilderView : D901BaseObject {
 	private int selectedHq;
 
 	private DeckDTO currentDeck;
-	private long? selectedDeck; //seems to be not necessary
+	private long? selectedDeck; 
 
 	private List<CardItem> collection;
 	private List<CardItem> filteredCollection;
 
 
+	void Awake (){
+		
+	}
+
 
 	void Start () {
-		
+		DeckBuilderService.getInstance().GetResearchList();
+		DeckBuilderService.getInstance().GetDeckList();
 		loadHqs ();
 		reloadDecks ();
 		collection = PlayerData.Saved.cardList;
-
 	}
 
 	public CardItem getSelectedHq(){
@@ -77,14 +81,9 @@ public class DeckBuilderView : D901BaseObject {
 
 	public void loadHqs(){
 		hqs = PlayerData.Saved.hqList;
-		refreshHq ();
-		/*Transform hqInstance;
-		if (bigCardPrefab != null && hqContainer != null) {
-			hqInstance = Instantiate (bigCardPrefab);
-			hqCard = hqInstance.GetComponent<Card> ();
+		if (hqs != null) {
 			refreshHq ();
-			hqInstance.SetParent(hqContainer, false);
-		}*/
+		}
 	}
 
 	private void refreshHq(){
@@ -99,7 +98,6 @@ public class DeckBuilderView : D901BaseObject {
 
 	private void refreshDeckInfo(DeckDTO deck){
 		Proto cardProto = protoRepository [deck.HQ];
-		//TODO correct use of deckInfo prefab necessary
 		deckInfo.Init (deck.ID,
 			cardProto.ID,
 			null,
@@ -117,7 +115,6 @@ public class DeckBuilderView : D901BaseObject {
 
 	public void reloadDecks(){
 		decks = PlayerData.Saved.deckList;
-		Transform deckInstance;
 		if (decks != null) {
 			Debug.Log ("decks number = " + decks.Count);
 
@@ -158,6 +155,27 @@ public class DeckBuilderView : D901BaseObject {
 		}
 	}
 
+	public void addOrUpdateDeckInList(DeckDTO deck){
+		if (decksContainer != null) {
+			bool deckFound = false;
+			foreach (DeckListElement deckInstance in decksContainer.GetComponentsInChildren<DeckListElement>()) {
+				if (deckInstance.ID == deck.ID) {
+					deckFound = true;
+					deckInstance.Init (deck.ID, null, deck.Title, 1234);
+					break;
+				}
+			}
+
+			if (!deckFound) {
+				addDeckToList (deck);
+			}	
+		}
+	}
+
+
+
+
+
 	public void btnBackgroundClick(){
 		Debug.Log ("bg click");
 		deselectDeck ();
@@ -183,6 +201,24 @@ public class DeckBuilderView : D901BaseObject {
 	}
 
 
+	public void btnCreateDeckClick(){
+		if (ifDeckName.text.Length > 0) {
+			newDeck ();
+			/*DeckBuilderService.getInstance ().SaveDeck (
+				null,
+				app.view.deckBuilder.ifDeckName.text,
+				app.view.deckBuilder.getSelectedHq().ProtoID,
+				new CardItem[] { }
+			);*/
+		} else {
+			//TODO visualize the reason of the issue
+			Debug.LogError("Deck name cant be empty");
+		}
+	}
+
+	public void btnEditDeckClick(){
+		editDeck (selectedDeck);
+	}
 
 	public void newDeck()
 	{
@@ -315,6 +351,18 @@ public class DeckBuilderView : D901BaseObject {
 
 	public void btnSaveDeck(){
 		DeckBuilderService.getInstance ().SaveDeck(currentDeck);
+	}
+
+	public void backToSavedDeck(long? ID)
+	{
+		Debug.Log ("backToSavedDeck");
+
+		selectedDeck = ID;
+		refreshDeckInfo (getDeckById(selectedDeck));
+
+		deckEditor.gameObject.SetActive (false);
+		deckList.gameObject.SetActive (true);
+
 	}
 
 }

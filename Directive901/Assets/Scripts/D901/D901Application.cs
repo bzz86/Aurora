@@ -36,7 +36,7 @@ public class D901Application : MonoBehaviour {
 			D901Controller[] list = it.GetComponents<D901Controller>();
 			
 			for (int i = 0; i < list.Length; i++) {
-				Debug.Log(list[i]);
+				Debug.Log("D901Controller: " + list[i]);
 				list[i].OnServerNotification(command, data);
 			}
 			return true;

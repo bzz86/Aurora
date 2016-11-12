@@ -49,10 +49,10 @@ public class LoginController : D901Controller {
 					//success auth => call research list and deck list
 
 
-					DeckBuilderService.getInstance().GetResearchList();
-					DeckBuilderService.getInstance().GetDeckList();
+					//DeckBuilderService.getInstance().GetResearchList();
+					//DeckBuilderService.getInstance().GetDeckList();
 
-					SceneManager.LoadScene (1);
+					SceneManager.LoadScene ("DeckBuilderScene");
 					//SceneLoader.getInstance().loadSceneById(1);
 				}
 				));

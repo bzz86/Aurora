@@ -17,6 +17,7 @@ public class DeckInfo : D901BaseObject {
 		string deckName)
 	{
 		Debug.Log ("DeckInfo init: id = " + id + ", protoId = " + protoId + ", art=" + art + ", title =" + title + ", description =" + description);
+		this.id = id;
 		this.deckName.text = deckName;
 		hqCard.Init (protoId,
 			art,

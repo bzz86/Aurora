@@ -5,26 +5,15 @@ using System.Collections.Generic;
 
 public delegate void Task();
 
-public class TaskExecutorScript : MonoBehaviour {
+public class TaskExecutorScript : D901Singleton<TaskExecutorScript> {
 
 	private Queue<Task> TaskQueue = new Queue<Task>();
 	private object _queueLock = new object();
 
-	private static TaskExecutorScript instance;
-
-
-
 	void Awake(){
-		instance = this;
-		DontDestroyOnLoad(gameObject);
+		base.onAwake(this);
 	}
 
-	public static TaskExecutorScript getInstance()
-	{
-		return instance;
-	}
-
-	// Update is called once per frame
 	void Update () {
 		lock (_queueLock)
 		{

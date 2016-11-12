@@ -12,35 +12,10 @@ public class DeckBuilderController : D901Controller {
 
 	private CardProtosRepository protoRepository = new CardProtosRepository();
 
-	public void btnCreateDeckClick(){
-		if (app.view.deckBuilder.ifDeckName.text.Length > 0) {
-			app.view.deckBuilder.newDeck ();
-			/*DeckBuilderService.getInstance ().SaveDeck (
-				null,
-				app.view.deckBuilder.ifDeckName.text,
-				app.view.deckBuilder.getSelectedHq().ProtoID,
-				new CardItem[] { }
-			);*/
-		} else {
-			//TODO visualize the reason of the issue
-			Debug.LogError("Deck name cant be empty");
-		}
-	}
-
-	public void btnEditDeckClick(){
-		app.view.deckBuilder.editDeck (1);
-			/*DeckBuilderService.getInstance ().SaveDeck (
-				null,
-				app.view.deckBuilder.ifDeckName.text,
-				app.view.deckBuilder.getSelectedHq().ProtoID,
-				new CardItem[] { }
-			);*/
-	}
-
-
-
 	public override void OnServerNotification (string commandName, string data)
 	{
+		Debug.Log ("DeckBuilderController caught OnServerNotification: " + commandName);
+
 		switch (commandName) {
 			case ServerNotification.DECKS_LIST:
 				Debug.Log ("DeckBuilderController caught DECK_LIST");
@@ -50,7 +25,7 @@ public class DeckBuilderController : D901Controller {
 					TaskExecutorScript.getInstance().ScheduleTask(new Task(delegate
 						{
 							List<DeckDTO> decks = new List<DeckDTO>(deckListResponse.Payload.Decks);
-						Debug.Log ("decks number before save = " + decks.Count);
+							Debug.Log ("decks number before save = " + decks.Count);
 							PlayerData.Saved.deckList = decks;
 							PlayerData.Save();
 							app.view.deckBuilder.reloadDecks();
@@ -103,11 +78,28 @@ public class DeckBuilderController : D901Controller {
 				DecksSaveResponseDTO deckSaveResponse = JsonConvert.DeserializeObject<DecksSaveResponseDTO>(data);
 				if(deckSaveResponse.Success){
 					TaskExecutorScript.getInstance().ScheduleTask(new Task(delegate
-						{
-							PlayerData.Saved.deckList.Add(deckSaveResponse.Deck);
-							PlayerData.Save();
-							app.view.deckBuilder.addDeckToList(deckSaveResponse.Deck);
+					{
+						DeckDTO deck = deckSaveResponse.Deck;
+
+						bool deckFound = false;
+						List<DeckDTO> deckList = PlayerData.Saved.deckList;
+						for(int i = 0; i < deckList.Count; i++){
+							if(deckList[i].ID == deck.ID){
+								deckFound = true;
+								deckList[i] = deck;
+								break;
+							}
 						}
+
+						if(!deckFound){
+							deckList.Add(deckSaveResponse.Deck);
+						}
+
+						PlayerData.Save();
+
+						app.view.deckBuilder.addOrUpdateDeckInList(deck);
+						app.view.deckBuilder.backToSavedDeck(deck.ID);
+					}
 					));
 				}
 				break;
